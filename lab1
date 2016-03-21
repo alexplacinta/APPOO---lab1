@@ -1,0 +1,139 @@
+			Java / Javascript
+
+1)Java(full OOP language)
+-encapsulation
+	by access modifiers such private/protected/package
+	example:
+		public class Coco {
+			private String lol = "wtf"; // cant access from outside
+			public String getLol() {  // can access from outside, it is interface
+				return lol;
+			}
+		}
+-inheritance
+	by "extends" statement, btw you can extends just ONE class, no more
+	example:
+		class Animal {
+			private String animal = "animal";
+			public String getAnimal() {
+				return animal;
+			}
+		}
+		public class Petooh extends Animal {
+			private String petooh = "petooh";
+			public String getPetooh() {
+				return petooh;
+			}
+			public static void main(String[] args) {
+				Petooh p = new Petooh();
+				System.out.println(p.getAnimal());
+				System.out.println(p.getPetooh());
+			}
+		}
+-polymorphism
+	by overriding methods of base class in derived class, saving the interface + dynamic bindig that already exists by included virtualization make its work.
+	example:
+		public class Animal {
+			public String move() {
+				return "move";
+			}
+			public static void main(String[] args) {
+				Animal a = new Animal();
+				Petooh p = new Petooh();
+				Snake s = new Snake();
+
+				System.out.println(a.move()); // move
+				a = p; // upcast reference of p of type Petooh into Animal and assign to reference variable a
+				System.out.println(a.move()); // run in 2 legs and make cococo
+				a = s; // upcast reference of s of type Snake into Animal and assign to reference variable a
+				System.out.println(a.move()); // pssssssssssss
+			}
+		}
+		class Petooh extends Animal {
+			@override
+			public String move() {
+				return "run in 2 legs and make cococo";
+			}
+			
+		}
+		class Snake extends Animal {
+			@override
+			public String move() {
+				return "pssssssssssss";
+			}
+			
+		}
+2) Javascript - scripting language in which implentation of OOP concepts are perverted.
+Here i try concepts not only for types, but also to instances directly
+
+-encpsulation
+	by using anonymous immediately invoked function
+	example:
+		var obj = (function(){
+			var lol = "wtf"; //cannot be accessed from outside
+			return {
+				//interface method
+				getLol: function() {
+					return lol;
+				}
+			}
+		})();
+	variable lol is in scope of this imediate function, so it can't be accessed from outside, only by returned object, so it is a kind of encapsulation or hiding of data
+-inheritance
+	//Define the Car class
+	function Car() { }
+	Car.prototype.speed= 'Car Speed';
+	Car.prototype.setSpeed = function(speed) {
+	    this.speed = speed;
+	    alert("Car speed changed");
+	}
+	 
+	 
+	//Define the Ferrari class
+	function Ferrari() { }
+	Ferrari.prototype = new Car();
+	 
+	 
+	// correct the constructor pointer because it points to Car
+	Ferrari.prototype.constructor = Ferrari;
+	 
+	// replace the setSpeed method
+	Ferrari.prototype.setSpeed = function(speed) {
+	    this.speed = speed;
+	    alert("Ferrari speed changed");
+	}
+	 
+	var car = new Ferrari();
+	car.setSpeed();
+-polymorphism
+	is toooo perverted.
+	but in my meaning i polymorphism it's not mandatory overriding methods of base in derived, but it's enough to have diferent
+	objects but with same method's name and assign references of this objects to one general variable that calls these methods
+	in dynamic binding mode;
+
+	example:
+
+	var a = {
+		move: function() {
+			return "a move";
+		}
+	}
+
+	var b = {
+		move: function() {
+			return "b move";
+		}
+	}
+
+	var mainVariable;
+
+	// 1 case
+	mainVariable = a;
+	mainVariable.move(); // a move
+
+	// 1 case
+	mainVariable = b;
+	mainVariable.move(); // b move
+
+	i think this maybe a kind of polymorhpism because the sense of it stands for better code organization, i mean that client code must not depend on types/objects, so these are handled into a general way like all objects with the same interface can send its references to one general variable/parameter to be handled because of included dynamic binding, but its not secure anyway;
+
